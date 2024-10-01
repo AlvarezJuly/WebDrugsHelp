@@ -1,0 +1,239 @@
+/*importaciones de las tipografias utilizadas en la pagina*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');    
+
+
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #EDEAE0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilo para el perfil del administrador */
+.sidebar {
+    background-color: #002E46;
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.sidebar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #EDEAE0;
+    padding: 6px;
+}
+
+.sidebar h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #EDEAE0;
+    margin: 10px 0;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #A7D8DE;
+    border: none;
+    border-radius: 20px;
+    color: #002E46;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/*---------*/
+li {
+    list-style: none;
+}
+
+.sidebar li a{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #A7D8DE;
+    border: none;
+    border-radius: 20px;
+    color: #002E46;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #002E46;
+    color: #EDEAE0; 
+    border-color: #84b6f4;
+    border: 2px solid #84b6f4; 
+}
+
+.sidebar button:hover {
+    background-color: #002E46;
+    color: #EDEAE0; 
+    border-color: #84b6f4;
+    border: 1px solid #84b6f4; 
+}
+
+/* Estilo para el contenido */
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #EDEAE0;
+    height: 600px;
+}
+
+.content-section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #002E46;
+    color: #EDEAE0;
+    box-shadow: 0 10px 10px rgba(0, 46, 70); 
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+}
+
+th {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    background-color: #A7D8DE;
+    color: #002E46;
+}
+
+td {
+    background-color: #01303F;
+}
+
+.actions img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.actions img:hover {
+    opacity: 0.7;
+}
+
+/* Separadores en la tabla */
+tr {
+    border-bottom: 2px solid #A7D8DE;
+}
+
+h2{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.actions img {
+    margin: 0 10px; /* Ajusta el margen según necesites */
+}
+
+/*Ventana Emergente (Modal)*/
+.modal {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    display: none; /* Oculta la modal por defecto */
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Color de fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
+}
+
+.modal-content {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: #EDEAE0;
+    background-color: #002E46;
+    margin: 15% auto; /* 15% desde la parte superior y centrado */
+    padding: 20px 20px;
+    border: 1px solid #888;
+    width: 30%; 
+}
+
+.close {
+    color: #A7D8DE	;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #A7D8DE;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #002E46;
+    margin-left: 27%;
+    margin-top: 30px;
+    background-color: #A7D8DE;
+    border-radius: 20px;
+}
+
+.modal-content label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    display: block; 
+    margin: 5px 0; 
+}
+
+.modal-content input {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    background-color: #A7D8DE;
+    border-color: #002E46;
+    border-radius: 20px;
+    margin-bottom: 10px; 
+    padding: 5px;
+    width: calc(100% - 12px);
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 5px 10px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/style_admi.css">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar con la foto del administrador y los botones -->
+    <div class="sidebar">
+        <img src="static/img/imagen_admin.jpg" alt="Foto del administrador">
+        <h3>Julissa Alvarez</h3>
+        <button id="button1" onclick="showSection('usuarios')">Gestion de Especialistas</button>
+        <li><a id="button3"  class="neumorphic-btn" onclick="window.location.href='/'"> Regresar al inicio </a></li>
+    </div>
+    <!-- Contenido que se muestra al presionar los botones -->
+    <div class="content">
+        <!-- Sección de Gestión -->
+        <div id="usuarios" class="content-section active">
+            <h2>Gestión de Especialistas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jocelyn Garcia</td>
+                        <td>jocelyn@gmail.com</td>
+                        <td>88260901</td>
+                        <td class="actions">
+                            <img src="static/img/eliminar.png" alt="..." onclick="eliminarUsuario(this)">
+                            <img src="static/img/editar.png" alt="..." onclick="editarUsuario(this)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Joel Concepcion</td>
+                        <td>tellez@gmail.com</td>
+                        <td>86270904</td>
+                        <td class="actions">
+                            <img src="static/img/eliminar.png" alt="Eliminar" onclick="eliminarUsuario(this)">
+                            <img src="static/img/editar.png" alt="Editar" onclick="editarUsuario(this)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+
+<!-- Ventana Emergente (Modal) ]
+ <div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Editar Usuario</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo">
+        <br>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono">
+        <br>
+        <button onclick="guardarCambios()">Guardar Cambios</button>
+    </div>
+</div>-->
+
+<!--/*<script src="/JS/js_admi.js"></script>
+<script src="/JS/eli_edi.js"></script>-->
+
+</body>
+</html>

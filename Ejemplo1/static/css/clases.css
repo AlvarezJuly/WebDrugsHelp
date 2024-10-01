@@ -1,0 +1,231 @@
+/*Estilos para la pantalla de inicio*/
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #A7D8DE;
+    color: white;
+}
+
+.logo img {
+    height: 60px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-btn {
+    background-color: #072F5F;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+
+footer {
+    background-color: #A7D8DE;
+    color: black;
+    padding: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+.footer-content div h3 {
+    margin-bottom: 10px;
+}
+
+.footer-content div p, .footer-content div a {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+
+
+/*Estilos de la parte de arriba de la pantalla principal*/
+
+.apartado1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hero-text {
+    flex: 1;
+}
+
+.apartado1 p{
+    font-weight: 500;
+}
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+.cta-btn {
+    background-color: #072F5F;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/*Prueba de implementación de los testimonios*/
+
+
+.encabeTestimonial{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+
+/*Estilos para la pantalla de acerca de nosotros*/
+
+.logo-contenedor {
+    margin-left: 18%;
+}
+
+.logoA {
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.contenidoA{
+    text-align: justify;
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.lema-foot{
+    text-align: center;
+    margin-top: 9%;
+
+}
+
+
+/* Estilos para la pantalla Que Nos Define */
+.que-nos-define {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.imagen-contenedor{
+    margin-bottom: 40px;
+}
+
+.imagen-definicion {
+    width: 40%;
+    height: 300px;
+}
+
+/* Estilos para los tres apartados (misión, visión, valores) */
+.fila-apartados {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.apartado {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.apartado h2 {
+    margin-bottom: 10px;
+}
+
+.apartado p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Contenedor de la pantalla de login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+
+/* Caja de login */
+.login-box {
+    margin-top: 10%;
+    background-color: #072F5F; /* Color de fondo oscuro */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.login-box h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Grupos de input */
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #d9d9d9;
+    font-size: 1rem;
+}
+
+/* Botón de login */
+.login-button {
+    width: 60%;
+    padding: 10px;
+    background-color: #D9D9D9; 
+    color: #072F5F; /* Texto oscuro */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #00e0d5; /* Color al hacer hover */
+}
+
