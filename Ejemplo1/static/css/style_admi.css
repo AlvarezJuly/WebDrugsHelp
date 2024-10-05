@@ -49,37 +49,23 @@ body {
     padding: 10px;
     border-radius: 10px;
 }
+/*Botones de la sidebar*/
 
-.sidebar button {
+.sidebar-btn {
     display: block;
     width: 100%;
-    margin: 10px 0;
     padding: 10px;
     background-color: #A7D8DE;
-    border: none;
+    border: none; /*sin borde en los botones */
     border-radius: 20px;
     color: #002E46;
     font-size: 16px;
     cursor: pointer;
+    text-decoration: none; /* solo a los enlaces */
 }
 
-/*---------*/
 li {
     list-style: none;
-}
-
-.sidebar li a{
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #A7D8DE;
-    border: none;
-    border-radius: 20px;
-    color: #002E46;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
 }
 
 .sidebar a:hover {
@@ -112,11 +98,28 @@ li {
     display: block;
 }
 
+/*boton agregar*/
+.btn-agregar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px ;
+    background-color: green; 
+    color: white; /* Texto oscuro */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute; 
+    right: 50px;  /* Margen desde la derecha */
+}
+
 /* Estilos para las tablas */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 90px;
     background-color: #002E46;
     color: #EDEAE0;
     box-shadow: 0 10px 10px rgba(0, 46, 70); 
@@ -237,3 +240,4 @@ h2{
     margin-top: 10px;
     padding: 5px 10px;
 }
+

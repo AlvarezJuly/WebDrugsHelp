@@ -3,58 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style_admi.css')}}"> <!-- aqui esta la nueva forma de redireccionamiento-->
+    <title>Administración</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_admi.css') }}">
 </head>
 <body>
 <div class="container">
     <!-- Sidebar con la foto del administrador y los botones -->
     <div class="sidebar">
-        <img src="static/img/imagen_admin.jpg" alt="Foto del administrador">
+        <img src="{{ url_for('static', filename='img/imagen_admin.jpg') }}" alt="Foto del administrador">
         <h3>Julissa Alvarez</h3>
-        <button id="button1" onclick="showSection('usuarios')">Gestion de Especialistas</button>
-        <li><a id="button3"  class="neumorphic-btn" onclick="window.location.href='/'"> Regresar al inicio </a></li>
+        <button id="button1" class="neumorphic-btn sidebar-btn" onclick="showSection('usuarios')">Gestión de Especialistas</button>
+        <ul>
+        <li><a id="button3" class="neumorphic-btn sidebar-btn" href="{{ url_for('index')}}">Regresar al inicio</a></li>
+        </ul>
     </div>
+    
     <!-- Contenido que se muestra al presionar los botones -->
     <div class="content">
         <!-- Sección de Gestión -->
         <div id="usuarios" class="content-section active">
             <h2>Gestión de Especialistas</h2>
+            <button class="btn-agregar" onclick="abrirModalAgregar()">
+                <img src="{{ url_for('static', filename='img/añadir.png') }}" alt="Añadir" style="width: 20px; height: 20px; color:white;">
+                Añadir
+            </button>
             <table>
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Correo</th>
+                        <th>Ciudad</th>
                         <th>Teléfono</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for especialista in especialistas %}
                     <tr>
-                        <td>Jocelyn Garcia</td>
-                        <td>jocelyn@gmail.com</td>
-                        <td>88260901</td>
+                        <td>{{ especialista['nombreCom'] }}</td>
+                        <td>{{ especialista['correo'] }}</td>
+                        <td>{{ especialista['ciudad'] }}</td>
+                        <td>{{ especialista['numero'] }}</td>
                         <td class="actions">
-                            <img src="static/img/eliminar.png" alt="..." onclick="eliminarUsuario(this)">
-                            <img src="static/img/editar.png" alt="..." onclick="editarUsuario(this)">
+                            <img src="{{ url_for('static', filename='img/eliminar.png') }}" alt="Eliminar" onclick="eliminarUsuario(this)">
+                            <img src="{{ url_for('static', filename='img/editar.png') }}" alt="Editar" onclick="editarUsuario(this)">
                         </td>
                     </tr>
-                    <tr>
-                        <td>Joel Concepcion</td>
-                        <td>tellez@gmail.com</td>
-                        <td>86270904</td>
-                        <td class="actions">
-                            <img src="static/img/eliminar.png" alt="Eliminar" onclick="eliminarUsuario(this)">
-                            <img src="static/img/editar.png" alt="Editar" onclick="editarUsuario(this)">
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-    
+    </div>
+</div>
 
-<!-- Ventana Emergente (Modal) ]
- <div id="editModal" class="modal">
+<!-- Ventana Modal para Editar -->
+<div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="cerrarModal()">&times;</span>
         <h2>Editar Usuario</h2>
@@ -64,15 +67,102 @@
         <label for="correo">Correo:</label>
         <input type="email" id="correo" name="correo">
         <br>
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad">
+        <br>
         <label for="telefono">Teléfono:</label>
         <input type="tel" id="telefono" name="telefono">
         <br>
         <button onclick="guardarCambios()">Guardar Cambios</button>
     </div>
-</div>-->
+</div>
 
-<!--/*<script src="/JS/js_admi.js"></script>
-<script src="/JS/eli_edi.js"></script>-->
+<!-- Ventana Modal para Agregar -->
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModalAgregar()">&times;</span>
+        <h2>Agregar Especialista</h2>
+        <label for="nombreNuevo">Nombre:</label>
+        <input type="text" id="nombreNuevo" name="nombreNuevo">
+        <br>
+        <label for="correoNuevo">Correo:</label>
+        <input type="email" id="correoNuevo" name="correoNuevo">
+        <br>
+        <label for="ciudadNueva">Ciudad:</label>
+        <input type="text" id="ciudadNueva" name="ciudadNueva">
+        <br>
+        <label for="telefonoNuevo">Teléfono:</label>
+        <input type="tel" id="telefonoNuevo" name="telefonoNuevo">
+        <br>
+        <button onclick="agregarEspecialista()">Agregar Especialista</button>
+    </div>
+</div>
+
+<script>
+function showSection(sectionId) {
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active');
+}
+
+function eliminarUsuario(element) {
+    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+        element.closest('tr').remove();
+    }
+}
+
+function editarUsuario(element) {
+    const row = element.closest('tr');
+    const cells = row.cells;
+    
+    document.getElementById('nombre').value = cells[0].textContent;
+    document.getElementById('correo').value = cells[1].textContent;
+    document.getElementById('ciudad').value = cells[2].textContent;
+    document.getElementById('telefono').value = cells[3].textContent;
+    
+    document.getElementById('editModal').style.display = 'block';
+}
+
+function cerrarModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+function guardarCambios() {
+    // Aquí iría la lógica para guardar los cambios
+    cerrarModal();
+}
+
+function abrirModalAgregar() {
+    document.getElementById('addModal').style.display = 'block';
+}
+
+function cerrarModalAgregar() {
+    document.getElementById('addModal').style.display = 'none';
+}
+
+function agregarEspecialista() {
+    const nombre = document.getElementById('nombreNuevo').value;
+    const correo = document.getElementById('correoNuevo').value;
+    const ciudad = document.getElementById('ciudadNueva').value;
+    const telefono = document.getElementById('telefonoNuevo').value;
+    
+    const table = document.querySelector('table tbody');
+    const newRow = table.insertRow();
+    newRow.innerHTML = `
+        <td>${nombre}</td>
+        <td>${correo}</td>
+        <td>${ciudad}</td>
+        <td>${telefono}</td>
+        <td class="actions">
+            <img src="{{ url_for('static', filename='img/eliminar.png') }}" alt="Eliminar" onclick="eliminarUsuario(this)">
+            <img src="{{ url_for('static', filename='img/editar.png') }}" alt="Editar" onclick="editarUsuario(this)">
+        </td>
+    `;
+    
+    cerrarModalAgregar();
+}
+</script>
 
 </body>
 </html>
