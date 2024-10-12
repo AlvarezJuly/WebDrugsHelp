@@ -82,19 +82,21 @@
     <div class="modal-content">
         <span class="close" onclick="cerrarModalAgregar()">&times;</span>
         <h2>Agregar Especialista</h2>
-        <label for="nombreNuevo">Nombre:</label>
-        <input type="text" id="nombreNuevo" name="nombreNuevo">
-        <br>
-        <label for="correoNuevo">Correo:</label>
-        <input type="email" id="correoNuevo" name="correoNuevo">
-        <br>
-        <label for="ciudadNueva">Ciudad:</label>
-        <input type="text" id="ciudadNueva" name="ciudadNueva">
-        <br>
-        <label for="telefonoNuevo">Teléfono:</label>
-        <input type="tel" id="telefonoNuevo" name="telefonoNuevo">
-        <br>
-        <button onclick="agregarEspecialista()">Agregar Especialista</button>
+        <form action="{{ url_for('guardar_especialista') }}" method="POST">
+            <label for="nombreNuevo">Nombre:</label>
+            <input type="text" id="nombreNuevo" name="nombreNuevo" required>
+            <br>
+            <label for="correoNuevo">Correo:</label>
+            <input type="email" id="correoNuevo" name="correoNuevo" required>
+            <br>
+            <label for="ciudadNueva">Ciudad:</label>
+            <input type="text" id="ciudadNueva" name="ciudadNueva" required>
+            <br>
+            <label for="telefonoNuevo">Teléfono:</label>
+            <input type="tel" id="telefonoNuevo" name="telefonoNuevo" required>
+            <br>
+            <button type="submit">Agregar Especialista</button>
+        </form>
     </div>
 </div>
 
@@ -129,7 +131,7 @@ function cerrarModal() {
 }
 
 function guardarCambios() {
-    // Aquí iría la lógica para guardar los cambios
+    // Aquí ira la lógica para guardar los cambios
     cerrarModal();
 }
 

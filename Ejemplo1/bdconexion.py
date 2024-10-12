@@ -16,7 +16,7 @@ firebaseConfig = {
     "storageBucket": "drugshelp-a6819.appspot.com",
 }
 
-# Inicialización de Pyrebase para autenticación y Realtime Database
+# Inicialización de Pyrebase para autenticación
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()  # Autenticación con Pyrebase
 
