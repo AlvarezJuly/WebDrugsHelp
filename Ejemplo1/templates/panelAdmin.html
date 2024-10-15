@@ -14,7 +14,7 @@
         <h3>Julissa Alvarez</h3>
         <button id="button1" class="neumorphic-btn sidebar-btn" onclick="showSection('usuarios')">Gestión de Especialistas</button>
         <ul>
-        <li><a id="button3" class="neumorphic-btn sidebar-btn" href="{{ url_for('index')}}">Regresar al inicio</a></li>
+            <li><a id="button3" class="neumorphic-btn sidebar-btn" href="{{ url_for('index')}}">Regresar al inicio</a></li>
         </ul>
     </div>
     
@@ -45,8 +45,8 @@
                         <td>{{ especialista['ciudad'] }}</td>
                         <td>{{ especialista['numero'] }}</td>
                         <td class="actions">
-                            <img src="{{ url_for('static', filename='img/eliminar.png') }}" alt="Eliminar" onclick="eliminarUsuario(this)">
-                            <img src="{{ url_for('static', filename='img/editar.png') }}" alt="Editar" onclick="editarUsuario(this)">
+                            <img src="{{ url_for('static', filename='img/eliminar.png') }}" alt="Eliminar" onclick="eliminarUsuario('{{ especialista['id'] }}')">
+                            <img src="{{ url_for('static', filename='img/editar.png') }}" alt="Editar" onclick="abrirModalEditar('{{ especialista['id'] }}', '{{ especialista['nombreCom'] }}', '{{ especialista['correo'] }}', '{{ especialista['ciudad'] }}', '{{ especialista['numero'] }}')">
                         </td>
                     </tr>
                     {% endfor %}
@@ -57,28 +57,29 @@
 </div>
 
 <!-- Ventana Modal para Editar -->
-<div id="editModal" class="modal">
+<div id="editModal" class="modal" style="display:none;">
     <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
+        <span class="close" onclick="cerrarModalEditar()">&times;</span>
         <h2>Editar Usuario</h2>
+        <input type="hidden" id="editId">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre">
+        <input type="text" id="editNombre" name="nombre">
         <br>
         <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo">
+        <input type="email" id="editCorreo" name="correo">
         <br>
         <label for="ciudad">Ciudad:</label>
-        <input type="text" id="ciudad" name="ciudad">
+        <input type="text" id="editCiudad" name="ciudad">
         <br>
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono">
+        <input type="tel" id="editTelefono" name="telefono">
         <br>
         <button onclick="guardarCambios()">Guardar Cambios</button>
     </div>
 </div>
 
 <!-- Ventana Modal para Agregar -->
-<div id="addModal" class="modal">
+<div id="addModal" class="modal" style="display:none;">
     <div class="modal-content">
         <span class="close" onclick="cerrarModalAgregar()">&times;</span>
         <h2>Agregar Especialista</h2>
@@ -108,31 +109,17 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.add('active');
 }
 
-function eliminarUsuario(element) {
-    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-        element.closest('tr').remove();
-    }
-}
-
-function editarUsuario(element) {
-    const row = element.closest('tr');
-    const cells = row.cells;
-    
-    document.getElementById('nombre').value = cells[0].textContent;
-    document.getElementById('correo').value = cells[1].textContent;
-    document.getElementById('ciudad').value = cells[2].textContent;
-    document.getElementById('telefono').value = cells[3].textContent;
-    
-    document.getElementById('editModal').style.display = 'block';
-}
-
-function cerrarModal() {
+function cerrarModalEditar() {
     document.getElementById('editModal').style.display = 'none';
 }
 
-function guardarCambios() {
-    // Aquí ira la lógica para guardar los cambios
-    cerrarModal();
+function abrirModalEditar(id, nombre, correo, ciudad, telefono) {
+    document.getElementById('editId').value = id;
+    document.getElementById('editNombre').value = nombre;
+    document.getElementById('editCorreo').value = correo;
+    document.getElementById('editCiudad').value = ciudad;
+    document.getElementById('editTelefono').value = telefono;
+    document.getElementById('editModal').style.display = 'block';
 }
 
 function abrirModalAgregar() {
@@ -143,26 +130,53 @@ function cerrarModalAgregar() {
     document.getElementById('addModal').style.display = 'none';
 }
 
-function agregarEspecialista() {
-    const nombre = document.getElementById('nombreNuevo').value;
-    const correo = document.getElementById('correoNuevo').value;
-    const ciudad = document.getElementById('ciudadNueva').value;
-    const telefono = document.getElementById('telefonoNuevo').value;
-    
-    const table = document.querySelector('table tbody');
-    const newRow = table.insertRow();
-    newRow.innerHTML = `
-        <td>${nombre}</td>
-        <td>${correo}</td>
-        <td>${ciudad}</td>
-        <td>${telefono}</td>
-        <td class="actions">
-            <img src="{{ url_for('static', filename='img/eliminar.png') }}" alt="Eliminar" onclick="eliminarUsuario(this)">
-            <img src="{{ url_for('static', filename='img/editar.png') }}" alt="Editar" onclick="editarUsuario(this)">
-        </td>
-    `;
-    
-    cerrarModalAgregar();
+function eliminarUsuario(especialistaId) {
+    if (confirm('¿Estás seguro de que deseas eliminar este especialista?')) {
+        // Enviar la solicitud de eliminación al servidor
+        fetch(`/eliminar/${especialistaId}`, { method: 'DELETE' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Especialista eliminado correctamente.');
+                location.reload();  // Recargar la página
+            } else {
+                alert('Error al eliminar el especialista.');
+            }
+        });
+    }
+}
+
+function guardarCambios() {
+    const id = document.getElementById('editId').value;
+    const nombre = document.getElementById('editNombre').value;
+    const correo = document.getElementById('editCorreo').value;
+    const ciudad = document.getElementById('editCiudad').value;
+    const telefono = document.getElementById('editTelefono').value;
+
+    const data = {
+        nombre: nombre,
+        correo: correo,
+        ciudad: ciudad,
+        telefono: telefono
+    };
+
+    // Enviar la solicitud de edición al servidor
+    fetch(`/editar/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Especialista editado correctamente.');
+            location.reload();
+        } else {
+            alert('Error al editar el especialista.');
+        }
+    });
 }
 </script>
 
