@@ -1,3 +1,5 @@
 # Ignorar entornos virtuales
 .venv/
 env/
+
+node_modules/
