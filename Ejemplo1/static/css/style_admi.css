@@ -29,6 +29,10 @@ body {
     padding: 20px;
     text-align: center;
     color: #FFFFFF;
+    display: flex;
+    flex-direction: column; /* Para alinear los elementos en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 12px; /* Espaciado uniforme entre elementos */
 }
 
 
@@ -49,25 +53,29 @@ body {
     padding: 10px;
     border-radius: 10px;
 }
-/*Botones de la sidebar*/
-
+/* Botones de la sidebar */
 .sidebar-btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
+    display: inline-block; /* Asegura que los botones se comporten como bloques alineados */
+    width: auto; /* Permite que el ancho se ajuste al contenido */
+    padding: 10px 20px; /* Ajusta el padding para uniformidad */
     background-color: #A7D8DE;
-    border: none; /*sin borde en los botones */
+    border: none; /* Sin borde en los botones */
     border-radius: 20px;
     color: #002E46;
     font-size: 16px;
     cursor: pointer;
-    text-decoration: none; /* solo a los enlaces */
+    text-decoration: none; /* Solo a los enlaces */
+    text-align: center; /* Centra el texto dentro del botón */
+    margin-right: 15px; /* Espaciado entre botones */
 }
 
+/* Estilo para lista sin márgenes adicionales */
 li {
     list-style: none;
+    display: inline-block; /* Para que los botones queden en una misma línea */
 }
 
+/* Hover para enlaces en la sidebar */
 .sidebar a:hover {
     background-color: #002E46;
     color: #EDEAE0; 
@@ -75,12 +83,14 @@ li {
     border: 2px solid #84b6f4; 
 }
 
+/* Hover para botones en la sidebar */
 .sidebar button:hover {
     background-color: #002E46;
     color: #EDEAE0; 
     border-color: #84b6f4;
     border: 1px solid #84b6f4; 
 }
+
 
 /* Estilo para el contenido */
 .content {

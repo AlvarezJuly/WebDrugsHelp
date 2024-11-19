@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import bdconexion  # archivo que contiene la conexión con Firebase
 
 app = Flask(__name__)
-app.secret_key = "Julissa2000_DH"  # Ya no es necesario si no usas flash messages
 
 @app.route('/')
 def index():
@@ -18,7 +17,7 @@ def queDefine():
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
-    firebase = bdconexion.get_firebase()  # Obtener la instancia de Firebase
+    firebase = bdconexion.get_firebase()  #instancia de Firebase
 
     if request.method == 'POST':
         email = request.form['email']
@@ -26,19 +25,20 @@ def login():
         try:
             # Intento de autenticación
             user = firebase.auth().sign_in_with_email_and_password(email, password)
-            print("Inicio de sesión exitoso")  # Se imprime en lugar de usar flash
+            print("Inicio de sesión exitoso")  # imprime 
             return redirect(url_for('panel'))
         except Exception as e:
             # Para error
-            print("Credenciales incorrectas. Inténtalo de nuevo.")  # Se imprime el error
+            print("Credenciales incorrectas. Inténtalo de nuevo.")  #Se imprime el error
             return redirect(url_for('login'))
 
     return render_template('login.html')
 
 @app.route('/Panel')
 def panel():
-    # Obtener la instancia de Firestore desde bdconexion
-    db = bdconexion.get_firestore()  # Obtener la referencia a Firestore
+    #Método Get 
+    # Instancia de Firestore desde mi arhivo bdconexion
+    db = bdconexion.get_firestore()
 
     # colección "contactos"
     contactos_ref = db.collection('contactos')
@@ -50,20 +50,19 @@ def panel():
         data = especialista.to_dict()  # Convertir los datos a diccionario
         data['id'] = especialista.id  # Guardar también el ID del documento
         lista_especialistas.append(data)
-
     return render_template('panelAdmin.html', especialistas=lista_especialistas)
 
 @app.route('/guardar_especialista', methods=['POST'])
 def guardar_especialista():
-    db = bdconexion.get_firestore()  # Obtener la referencia a Firestore
+    db = bdconexion.get_firestore()  
 
-    # Obtener los datos enviados por el formulario del modal
+    # Obtner los datos del modal
     nombre = request.form['nombreNuevo']
     correo = request.form['correoNuevo']
     ciudad = request.form['ciudadNueva']
     telefono = request.form['telefonoNuevo']
 
-    # Diccionario con los datos del especialista
+    # Campos del nuevo especialista para enviar a la bd
     nuevo_especialista = {
         "nombreCom": nombre,
         "correo": correo,
@@ -72,20 +71,21 @@ def guardar_especialista():
     }
 
     try:
-        # Agregando el especialista a la colección 'contactos'
+        # Agregando el especialista a la colección que en la bd es 'contactos'
+        #y se muestras las alertas de validación o para atrapar algun error
         db.collection('contactos').add(nuevo_especialista)
-        print("Especialista agregado con éxito")  # Se imprime en lugar de usar flash
+        print("Especialista agregado con éxito") 
     except Exception as e:
-        print(f"Error al agregar el especialista: {e}")  # Se imprime el error
+        print(f"Error al agregar el especialista: {e}")  #error
 
-    return redirect(url_for('panel'))  # Redirigir de nuevo al panel después de guardar
+    return redirect(url_for('panel'))  #panel después de guardar
 
 @app.route('/eliminar/<id>', methods=['DELETE'])
 def eliminar_especialista(id):
     db = bdconexion.get_firestore()
     try:
         db.collection('contactos').document(id).delete()
-        print("Especialista eliminado con éxito")  # Imprime el mensaje
+        print("Especialista eliminado con éxito")  # Muestra mensaje de sastifactorio.
         return jsonify({"success": True})
     except Exception as e:
         print(f"Error al eliminar especialista: {e}")  # Imprime el error

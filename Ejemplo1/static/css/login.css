@@ -1,4 +1,26 @@
 
+
+/* Aplicar un fondo uniforme */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; /* Cambia a cualquier color de fondo que desees */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que ocupa toda la altura de la pantalla */
+}
+
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+ 
+
  /* Contenedor de la pantalla de login */
  .login-container {
     display: flex;
@@ -53,3 +75,15 @@
 .login-button:hover {
     background-color: #00e0d5; /* Color al hacer hover */
 }
+
+
+
+
+
+
+
+
+
+
+
+
